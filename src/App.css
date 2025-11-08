@@ -14,13 +14,21 @@
   background: rgba(0, 0, 0, 0.3);
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 8px 12px;
   cursor: pointer;
   transition: background 0.3s;
+  border-radius: 4px;
 }
 
 .slider-nav:hover {
   background: rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive slider navigation for mobile */
+@media (min-width: 640px) {
+  .slider-nav {
+    padding: 10px 15px;
+  }
 }
 
 /* Feature block hover effects */
@@ -49,3 +57,4 @@
     radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, rgba(169, 175, 188, 0.1) 0%, transparent 50%);
 }
+
