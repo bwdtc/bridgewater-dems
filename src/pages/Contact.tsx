@@ -194,7 +194,7 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
             <p className="text-sm text-gray-700">
-              You can also reach us directly at <strong>info@bridgewaterdems.org</strong> or mail us at:<br />
+              You can also mail us at:<br />
               <strong>Bridgewater Democratic Town Committee</strong><br />
               P.O. Box 132<br />
               Bridgewater, CT 06752
