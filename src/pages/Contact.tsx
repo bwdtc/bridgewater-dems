@@ -9,6 +9,8 @@ const Contact = () => {
     message: ''
   })
   const [submitMessage, setSubmitMessage] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -19,9 +21,37 @@ const Contact = () => {
   }
 
   const handleSubmit = (e: React.FormEvent) => {
-    // Let Netlify handle the form submission
-    // The form will POST to the same URL with Netlify handling it
-    setSubmitMessage('Submitting your message...')
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitMessage('')
+    setIsSuccess(false)
+
+    const form = e.target as HTMLFormElement
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form) as any).toString()
+    })
+      .then(() => {
+        setIsSuccess(true)
+        setSubmitMessage('Thank you! Your message has been sent successfully. We\'ll get back to you soon.')
+        setIsSubmitting(false)
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: 'General Inquiry',
+          message: ''
+        })
+      })
+      .catch((error) => {
+        console.error('Form submission error:', error)
+        setIsSuccess(false)
+        setSubmitMessage('Sorry, there was an error sending your message. Please try again or email us directly at info@bridgewaterdems.org')
+        setIsSubmitting(false)
+      })
   }
 
   return (
@@ -44,7 +74,11 @@ const Contact = () => {
           </h2>
 
           {submitMessage && (
-            <div className="mb-6 p-4 bg-green-100 border border-green-300 rounded-lg text-green-700">
+            <div className={`mb-6 p-4 rounded-lg ${
+              isSuccess
+                ? 'bg-green-100 border border-green-300 text-green-700'
+                : 'bg-red-100 border border-red-300 text-red-700'
+            }`}>
               {submitMessage}
             </div>
           )}
@@ -52,6 +86,7 @@ const Contact = () => {
           <form
             name="contact"
             method="POST"
+            action="/"
             data-netlify="true"
             netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
@@ -149,16 +184,20 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="w-full bg-[#9e562a] text-white py-3 rounded-md font-medium hover:bg-[#8a4a24] transition-colors"
+              disabled={isSubmitting}
+              className="w-full bg-[#9e562a] text-white py-3 rounded-md font-medium hover:bg-[#8a4a24] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Send Message
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
           </form>
 
-          {/* Netlify Forms Information */}
-          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-sm text-blue-800">
-              <strong>Note:</strong> This form is powered by Netlify Forms. After deployment, configure email notifications in your Netlify dashboard under Site Settings → Forms.
+          {/* Contact Information */}
+          <div className="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+            <p className="text-sm text-gray-700">
+              You can also reach us directly at <strong>info@bridgewaterdems.org</strong> or mail us at:<br />
+              <strong>Bridgewater Democratic Town Committee</strong><br />
+              P.O. Box 132<br />
+              Bridgewater, CT 06752
             </p>
           </div>
         </div>
