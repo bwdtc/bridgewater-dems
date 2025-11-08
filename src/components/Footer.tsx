@@ -19,7 +19,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="border-t border-gray-600 mt-8 pt-6 text-sm text-gray-400">
-          <p>Copyright © 2024 Bridgewater DTC. All rights reserved. Paid for by the Bridgewater DTC, Cynthia Feuer, Treasurer</p>
+          <p>Copyright © 2025 Bridgewater DTC. All rights reserved. Paid for by the Bridgewater DTC, Cynthia Feuer, Treasurer</p>
           <p className="mt-2">P.O. Box 132, Bridgewater, CT 06752</p>
         </div>
       </div>
