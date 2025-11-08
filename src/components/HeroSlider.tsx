@@ -43,11 +43,10 @@ const HeroSlider = () => {
               alt={slide.title}
               className="w-full h-full object-contain"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-30" />
 
             {/* Caption */}
             <div className="absolute left-4 right-4 sm:left-8 sm:right-8 md:left-auto md:right-8 bottom-4 sm:bottom-8 md:top-1/2 md:transform md:-translate-y-1/2 text-white max-w-full md:max-w-md">
-              <div className="bg-black bg-opacity-60 p-3 sm:p-4 md:p-6 rounded-lg">
+              <div className="bg-black bg-opacity-70 p-3 sm:p-4 md:p-6 rounded-lg">
                 <h2 className="font-adamina text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 md:mb-4">
                   {slide.title}
                 </h2>
@@ -98,4 +97,3 @@ const HeroSlider = () => {
 }
 
 export default HeroSlider
-
